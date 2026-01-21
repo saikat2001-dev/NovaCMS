@@ -1,0 +1,68 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    --color-primary: var(--primary-color);
+    --color-secondary: var(--secondary-color);
+    --color-success: var(--success-color);
+    --color-warning: var(--warning-color);
+    --color-error: var(--error-color);
+    --color-info: var(--info-color);
+    --color-light: var(--light-color);
+    --color-dark: var(--dark-color);
+    --color-white: var(--white-color);
+    --color-black: var(--black-color);
+    --color-background: var(--background-color);
+    --color-text: var(--text-color);
+    --color-border: var(--border-color);
+}
+
+:root {
+    --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    --primary-color: #2563EB;
+    --secondary-color: #64748B;
+    --success-color: #16A34A;
+    --warning-color: #F59E0B;
+    --error-color: #DC2626;
+    --info-color: #0EA5E9;
+    --light-color: #F9FAFB;
+    --dark-color: #1F2937;
+    --white-color: #FFFFFF;
+    --black-color: #000000;
+    --background-color: #F8FAFC;
+    --text-color: #0F172A;
+    --border-color: #E2E8F0;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+:root[color-preference="dark"] {
+    --background-color: #1F2937;
+    --text-color: #F9FAFB;
+    --border-color: #374151;
+    --primary-color: #60A5FA;
+    --secondary-color: #94A3B8;
+}
+
+:root[color-preference="light"] {
+    --background-color: #F8FAFC;
+    --text-color: #0F172A;
+    --border-color: #E2E8F0;
+}
+
+html,
+body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+}
