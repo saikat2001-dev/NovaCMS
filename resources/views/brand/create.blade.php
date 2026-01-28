@@ -10,20 +10,21 @@
                     </svg>
                 </div>
                 <h2 @class(['text-3xl', 'font-bold', 'text-text', 'tracking-tight'])>
-                    Create your brand
+                    {{ isset($brand) ? 'Edit Brand' : 'Create your brand' }}
                 </h2>
                 <p @class(['mt-2', 'text-sm', 'text-secondary'])>
-                    Let's set up your business identity
+                    {{ isset($brand) ? 'Update your business identity' : "Let's set up your business identity" }}
                 </p>
             </div>
 
-            <form @class(['mt-8', 'space-y-6']) action="{{ route('brand.store') }}" method="POST">
+            <form @class(['mt-8', 'space-y-6']) action="{{ isset($brand) ? route('brand.update', $brand->id) : route('brand.store') }}" method="POST">
                 @csrf
+                {{-- @method(isset($brand) ? 'PUT' : 'POST') --}}
                 <div @class(['space-y-5'])>
                     <!-- Brand Name Input -->
                     <div>
                         <label for="name" @class(['block', 'text-sm', 'font-semibold', 'text-text', 'mb-2'])>Brand Name</label>
-                        <input id="name" name="name" type="text" value="{{ old('name') }}" @class(['appearance-none', 'relative', 'block', 'w-full', 'px-4', 'py-3.5', 'border', 'border-gray-200' => !$errors->has('name'),
+                        <input id="name" name="name" type="text" value="{{ old('name', $brand->name ?? '') }}" @class(['appearance-none', 'relative', 'block', 'w-full', 'px-4', 'py-3.5', 'border', 'border-gray-200' => !$errors->has('name'),
                         'border-red-500 focus:border-red-500 focus:ring-red-500/20' => $errors->has('name'), 'placeholder-gray-400', 'text-text', 'rounded-xl', 'focus:outline-none', 'focus:ring-2', 'focus:ring-primary/20', 'focus:border-primary', 'focus:z-10', 'sm:text-sm', 'transition-all', 'duration-200', 'bg-gray-50', 'focus:bg-white']) placeholder="e.g. Acme Corporation">
                         @error('name')
                             <p @class(['text-red-500', 'text-xs', 'mt-1'])>{{ $message }}</p>
@@ -33,7 +34,7 @@
 
                 <div>
                     <button type="submit" @class(['group', 'relative', 'w-full', 'flex', 'justify-center', 'py-3.5', 'px-4', 'border', 'border-transparent', 'text-sm', 'font-bold', 'rounded-xl', 'text-white', 'bg-primary', 'hover:bg-indigo-700', 'focus:outline-none', 'focus:ring-2', 'focus:ring-offset-2', 'focus:ring-primary', 'transition-all', 'shadow-xl', 'hover:translate-y-px', 'hover:shadow-primary/20'])>
-                        Let's Get Started
+                        {{ isset($brand) ? 'Update Brand' : "Let's Get Started" }}
                     </button>
                 </div>
             </form>
