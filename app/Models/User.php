@@ -41,8 +41,12 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public static function isEmailTaken($email)
+    {
+        return self::where('email', $email)->exists();
     }
 }
