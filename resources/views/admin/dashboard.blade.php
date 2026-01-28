@@ -144,19 +144,19 @@
                         <div>
                             <div @class(['flex', 'justify-between', 'text-sm', 'mb-1'])>
                                 <span @class(['text-slate-400'])>Storage</span>
-                                <span @class(['text-white', 'font-medium'])>45%</span>
+                                <span @class(['text-white', 'font-medium'])>{{ $health['storage'] }}%</span>
                             </div>
                             <div @class(['w-full', 'bg-slate-700', 'rounded-full', 'h-1.5'])>
-                                <div @class(['bg-primary', 'h-1.5', 'rounded-full']) style="width: 45%"></div>
+                                <div @class(['h-1.5', 'rounded-full', 'bg-primary' => $health['storage'] < 70, 'bg-orange-500' => $health['storage'] >= 70 && $health['storage'] < 90, 'bg-red-500' => $health['storage'] >= 90]) style="width: {{ $health['storage'] }}%"></div>
                             </div>
                         </div>
                         <div>
                             <div @class(['flex', 'justify-between', 'text-sm', 'mb-1'])>
-                                <span @class(['text-slate-400'])>Database</span>
-                                <span @class(['text-white', 'font-medium'])>12%</span>
+                                <span @class(['text-slate-400'])>Database <span class="text-[10px]">({{ $health['dbSize'] }}MB)</span></span>
+                                <span @class(['text-white', 'font-medium'])>{{ $health['database'] }}%</span>
                             </div>
                             <div @class(['w-full', 'bg-slate-700', 'rounded-full', 'h-1.5'])>
-                                <div @class(['bg-green-500', 'h-1.5', 'rounded-full']) style="width: 12%"></div>
+                                <div @class(['h-1.5', 'rounded-full', 'bg-green-500' => $health['database'] < 50, 'bg-orange-500' => $health['database'] >= 50 && $health['database'] < 80, 'bg-red-500' => $health['database'] >= 80]) style="width: {{ $health['database'] }}%"></div>
                             </div>
                         </div>
                     </div>

@@ -49,8 +49,6 @@ class AuthController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:users,username'],
             'email' => ['required', 'string', 'email', 'max:255', new EmailUnique],
             'password' => ['required', 'string', 'min:8', 'confirmed', new PasswordFormat],
-            'role' => ['required', 'string', 'in:user,admin'],
-            'brand_name' => ['required_if:role,admin', 'nullable', 'string', 'max:255'],
         ], [
             'fullName.required' => 'Name is required',
             'username.required' => 'Username is required',
@@ -58,7 +56,6 @@ class AuthController extends Controller
             'email.required' => 'Email is required',
             'password.required' => 'Password is required',
             'password.confirmed' => 'Passwords do not match',
-            'brand_name.required_if' => 'Brand name is required for Admin accounts',
         ]);
 
         if ($validator->fails()) {
@@ -70,16 +67,17 @@ class AuthController extends Controller
                 $request->fullName,
                 $request->username,
                 $request->email,
-                $request->password,
-                $request->role,
-                $request->brand_name
+                $request->password
             );
 
-        if (!$user) {
-            return redirect()->back()->withErrors('Registration failed! Please try again.');
+            if (!$user) {
+                return redirect()->back()->withErrors('Registration failed! Please try again.')->withInput();
             }
 
-            return redirect()->route('login')->with('success', 'Registration successful! Please login.');
+            // Automatically log the user in after signup
+            Auth::login($request->email, $request->password);
+
+            return redirect()->route('brand.create')->with('success', 'Registration successful! Now, let\'s create your brand.');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage())->withInput();
         }

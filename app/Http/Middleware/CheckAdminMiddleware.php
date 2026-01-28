@@ -10,8 +10,8 @@ class CheckAdminMiddleware
 {
   public function handle(Request $request, Closure $next)
   {
-    if (!Auth::checkAuth()) {
-      return redirect()->route('login');
+    if (!Auth::hasRole('admin')) {
+      return redirect()->route('home');
     }
     return $next($request);
   }
