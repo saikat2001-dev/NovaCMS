@@ -17,6 +17,9 @@ require __DIR__.'/home.route.php';
 // Admin Routes (Handled in bootstrap/app.php)
 // require __DIR__.'/admin.route.php';
 
+// Permission Routes
+require __DIR__.'/permission.route.php';
+
 // Redirects for better UX
 // Route::redirect('/home', '/');
 

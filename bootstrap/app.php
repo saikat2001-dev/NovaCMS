@@ -22,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
             Route::middleware(['web'])->prefix('user')->group(__DIR__.'/../routes/user.route.php');
             Route::middleware(['web'])->prefix('admin')->group(__DIR__.'/../routes/admin.route.php');
             Route::middleware(['web', 'role:admin'])->prefix('admin/brand')->name('brand.')->group(__DIR__.'/../routes/brand.route.php');
+            Route::middleware(['web', 'role:admin'])->prefix('admin/permissions')->name('permissions.')->group(__DIR__.'/../routes/permission.route.php');
         }
     )
     ->withMiddleware(function (Middleware $middleware): void {
